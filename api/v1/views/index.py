@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""index module showing status end-point"""
+"""module showing status end-point"""
 
 
 from api.v1.views import app_views
