@@ -4,12 +4,18 @@ entry point of our application
 """
 
 import os
-from flask import Flask
+from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
+
+
+@app.errorhandler(404)
+def api_error(error):
+    """a method that handles 404 error"""
+    return jsonify({"error": "Not found"}), 404
 
 
 @app.teardown_appcontext
