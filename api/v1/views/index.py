@@ -1,12 +1,15 @@
 #!/usr/bin/python3
-"""module showing status end-point"""
-
+"""
+return status of the page
+"""
 
 from api.v1.views import app_views
-from flask import jsonify, Blueprint
-import json
+from flask import jsonify
 
 
 @app_views.route('/status')
-def show_status():
-    return jsonify({"status": "OK"})
+def get_status():
+    """Retrive response status"""
+    return jsonify({
+        'status': 'OK'
+     })
