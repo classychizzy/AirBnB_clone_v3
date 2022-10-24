@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+entry point of our application
+"""
+
 import os
 from flask import Flask
 from models import storage
@@ -9,7 +13,10 @@ app.register_blueprint(app_views)
 
 
 @app.teardown_appcontext
-def tear_down(exc):
+def tear_down(exception):
+    """
+     a method that closes the storage
+    """
     storage.close()
 
 
