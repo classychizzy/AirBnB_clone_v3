@@ -22,7 +22,7 @@ def get_status():
      })
 
 
-@app_views.route('/stats', methods=['GET'])
+@app_views.route('/stats')
 def get_stats():
     """retrieves the number of each objects by type"""
 
