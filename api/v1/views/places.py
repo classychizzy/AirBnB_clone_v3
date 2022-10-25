@@ -43,10 +43,10 @@ def get_place(place_id):
 def delete_place(place_id):
     """Delete a place based on id"""
     place = storage.get(Place, place_id)
-    storage.delete(place)
-    storage.save()
     if not (place):
         abort(404, 'Not found')
+    storage.delete()
+    storage.save()
     return make_response(jsonify({}), 200)
 
 
