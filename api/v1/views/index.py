@@ -3,8 +3,8 @@
 return status of the page
 """
 
-from api.v1.views import app_views
 from flask import jsonify
+from api.v1.views import app_views
 from models import storage
 from models.amenity import Amenity
 from models.city import City
@@ -14,15 +14,15 @@ from models.state import State
 from models.user import User
 
 
-@app_views.route('/status')
+@app_views.route('/status', methods=['GET'])
 def get_status():
     """Retrive response status"""
     return jsonify({
         'status': 'OK'
-     })
+    })
 
 
-@app_views.route('/stats')
+@app_views.route('/stats', methods=['GET'])
 def get_stats():
     """retrieves the number of each objects by type"""
 
@@ -33,4 +33,4 @@ def get_stats():
         "reviews": storage.count(Review),
         "states": storage.count(State),
         "users": storage.count(User),
-     })
+    })
