@@ -42,11 +42,12 @@ def get_place(place_id):
                  methods=['DELETE'], strict_slashes=False)
 def delete_place(place_id):
     """Delete a place based on id"""
-    place = storage.get(Place, place_id)
-    if not place:
-        abort(404)
-    storage.delete(place)
-    storage.save()
+    try:
+        place = storage.get(Place, place_id)
+        storage.delete(place)
+        storage.save()
+    except Exception:
+        abort(404, 'Not found')
     return make_response(jsonify({}), 200)
 
 
