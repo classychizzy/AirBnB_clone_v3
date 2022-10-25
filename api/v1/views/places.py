@@ -32,7 +32,7 @@ def get_place(place_id):
     """Get one place according to id"""
     place = storage.get(Place, place_id)
 
-    if not (place):
+    if not place:
         abort(404)
     return jsonify(place.to_dict())
 
@@ -43,7 +43,7 @@ def get_place(place_id):
 def delete_place(place_id):
     """Delete a place based on id"""
     place = storage.get(Place, place_id)
-    if not (place):
+    if not place:
         abort(404, 'Not found')
     storage.delete()
     storage.save()
@@ -55,8 +55,8 @@ def delete_place(place_id):
                  methods=['POST'], strict_slashes=False)
 def create_place(city_id):
     """Create a new Place object"""
-    city = storage.get(City, city_id)
     imput = request.get_json()
+    city = storage.get(City, city_id)
     user = storage.get(User, imput['user_id'])
     if not city or not user:
         abort(404)
@@ -66,7 +66,7 @@ def create_place(city_id):
         abort(400, description="Missing name")
     if 'user_id' not in request.get_json():
         abort(400, description="Missing user_id")
-    # imput = request.get_json()
+    # imput = reiquest.get_json()
     # user = storage.get(User, imput['user_id'])
     new_place = Place(**imput)
     new_place.save()
