@@ -53,3 +53,20 @@ def post_state():
     storage.new(state)
     storage.save()
     return make_response(state.to_dict()), 201
+
+
+@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
+def update_state(state_id):
+    """Update a state using id"""
+    state = storage.get(State, state_id)
+    if not state:
+        abort(404)
+    if not request.get_json():
+        abort(400, description="Not a JSON")
+    imput = request.get_json()
+    ig = ['id', 'created_at', 'updated_at']
+    for k, v in imput.items():
+        if k not in ig:
+            setattr(state, k, v)
+    storage.save()
+    return make_response(jsonify(state.to_dict()), 200)
